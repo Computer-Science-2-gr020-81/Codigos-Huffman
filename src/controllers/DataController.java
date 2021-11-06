@@ -6,22 +6,22 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
 
-import views.Menu;
-import models.Node;
+import views.MenuN;
+import models.Nodo;
 import utils.Util;
 
 public class DataController {
 
-    private Menu menu;
+    private MenuN menu;
     private List<String> letters = new ArrayList<>();
     private Map<String,Integer> countLetters = new HashMap<>();
-    private Node [][] treeRepresentation;
+    private Nodo<String> [][] treeRepresentation;
 
-    public DataController(Menu menu){
+    public DataController(MenuN menu){
         this.menu = menu;
     }
 
-    public Node[][] getTreeRepresentation(){
+    public Nodo<String>[][] getTreeRepresentation(){
         return treeRepresentation;
     }
 
@@ -30,6 +30,7 @@ public class DataController {
             String input = menu.getInputMessage();
             findAllLetters(input);
             initTreeRepresentation();
+            startProcces();
         });
     }
 
@@ -45,7 +46,7 @@ public class DataController {
         });
         for(int j = 0; j < input.length(); j++){
             String key = input.substring(j,j+1);
-            int value = countLetters.get(key).intValue();
+            int value = countLetters.get(key);
             countLetters.put(key,++value);
         }
         System.out.println(letters.toString());
@@ -54,12 +55,12 @@ public class DataController {
 
     private void initTreeRepresentation(){
         int sizeCol = (letters.size()*2)-1;
-        this.treeRepresentation = new Node[5][sizeCol];
+        this.treeRepresentation = new Nodo[5][sizeCol];
 
         //Guardando letras
         for(int x = 0; x < treeRepresentation[0].length;x++){
-            Node temp = new Node();
-            temp.setIsUsed(false);
+            Nodo<String> temp = new Nodo();
+            temp.setWasUsed(false);
             if(x < letters.size()){
                 temp.setValue(letters.get(x));
             }else{
@@ -71,7 +72,7 @@ public class DataController {
         //Inicializando el resto en 0
         for(int i = 1; i < treeRepresentation.length; i++){
             for(int j = 0; j < treeRepresentation[i].length;j++){
-                Node temp = new Node();
+                Nodo<String> temp = new Nodo();
                 if(i == 1 && j < letters.size()){
                     Integer value = this.countLetters.get(treeRepresentation[i-1][j].getValue());
                     temp.setValue(String.valueOf(value));
@@ -83,6 +84,37 @@ public class DataController {
         }
         System.out.println("\n");
         Util.printRepresentation(treeRepresentation);
+        System.out.println("--------------------------------------------------");
+    }
+    
+    private Nodo<String> findMinFrequencie(Nodo<String>[] frecuencias ){
+        Integer min = Integer.MAX_VALUE;
+        Integer indexMinValue = 0;
+        for(int i=0; i < frecuencias.length; i++){
+            Nodo<String> frecuencia = frecuencias[i];
+            if(Integer.parseInt(frecuencia.getValue()) < min && !frecuencia.getValue().equals("0") && !frecuencia.isWasUsed()){
+               min = Integer.parseInt(frecuencia.getValue());
+               indexMinValue = i;
+            }
+        }
+        frecuencias[indexMinValue].setWasUsed(true);
+        return frecuencias[indexMinValue];
+    }
+    
+    private void startProcces(){
+        for(int i = letters.size(); i < treeRepresentation.length;i++){
+            Nodo<String>[] frecuencias = treeRepresentation[1];
+            //Util.printArrayRepresentation(frecuencias);
+            Nodo<String> f1 = findMinFrequencie(frecuencias);
+            Nodo<String> f2 = findMinFrequencie(frecuencias);
+            
+            
+            
+            System.out.println("f1: " + f1.getValue() + " f2: " + f2.getValue());
+            
+            
+        }
+        
     }
     
     

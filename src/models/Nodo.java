@@ -1,28 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-/**
- *
- * @param <T>
- */
-public class Nodo<T> {
-    private T elemento;
-    private Nodo izquierda, derecha;
 
-    public Nodo(T elemento) {
-        this.elemento = elemento;
+public class Nodo<T> {
+    
+    private T value;
+    private Nodo izquierda, derecha;
+    private boolean wasUsed;
+
+    public Nodo(T value) {
+        this.value = value;
     }
+    
+    public Nodo(){}
     
     public Nodo insertar(Nodo n, T elemento) {
         if (n == null)
             return new Nodo(elemento);
-        else if (elemento.hashCode() < n.elemento.hashCode())
+        else if (elemento.hashCode() < n.value.hashCode())
             n.izquierda = insertar(n.izquierda, elemento);
-        else if (elemento.hashCode() > n.elemento.hashCode())
+        else if (elemento.hashCode() > n.value.hashCode())
             n.derecha = insertar(n.derecha, elemento);
         return n;
     }
@@ -37,8 +33,8 @@ public class Nodo<T> {
         }
     }
 
-    public T getElemento() {
-        return elemento;
+    public T getValue() {
+        return value;
     }
 
     public Nodo getIzquierda() {
@@ -49,4 +45,15 @@ public class Nodo<T> {
         return derecha;
     }
     
+    public void setValue(T value){
+        this.value = value;
+    }
+
+    public boolean isWasUsed() {
+        return wasUsed;
+    }
+
+    public void setWasUsed(boolean wasUsed) {
+        this.wasUsed = wasUsed;
+    } 
 }
