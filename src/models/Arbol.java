@@ -2,16 +2,16 @@ package models;
 
 
 public class Arbol<T> {
-    private Nodo raiz;
+    private Nodo<T> root;
     
-    public void insertar(T elemento) {
-        if (raiz == null)
-            raiz = new Nodo(elemento);
+    public void insert(T value) {
+        if (root == null)
+            root = new Nodo(root);
         else
-            raiz = raiz.insertar(raiz, elemento);
+            root = root.insertar(root, value);
     }
 
     public Nodo getRaiz() {
-        return raiz;
+        return root;
     }
 }

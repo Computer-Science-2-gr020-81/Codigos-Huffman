@@ -15,7 +15,6 @@ public class MenuN extends javax.swing.JFrame {
     public MenuN() {
         initTemplate();
         dataController = new DataController(this);
-        
         dataController.initListeners();
     }
     
@@ -123,12 +122,12 @@ public class MenuN extends javax.swing.JFrame {
         Controlador objControlador = new Controlador(objLienzo, objArbol); //CONTROLADOR
         //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         //INSERTAR Y PINTAR ARBOL
-        objArbol.insertar(7);
-        objArbol.insertar(2);
-        objArbol.insertar(9);
-        objArbol.insertar(5);
-        objArbol.insertar(0);
-        objArbol.insertar(10);
+        objArbol.insert(7);
+        objArbol.insert(2);
+        objArbol.insert(9);
+        objArbol.insert(5);
+        objArbol.insert(0);
+        objArbol.insert(10);
         objControlador.iniciar();
         //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         //MOSTRAR LIENZO EN UNA VENTANA TODO
@@ -143,6 +142,7 @@ public class MenuN extends javax.swing.JFrame {
         initComponents();
         setTitle("Condigos de Huffman");
         setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

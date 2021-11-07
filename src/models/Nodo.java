@@ -4,8 +4,9 @@ package models;
 public class Nodo<T> {
     
     private T value;
-    private Nodo izquierda, derecha;
+    private Nodo leftNode, rightNode;
     private boolean wasUsed;
+    private Integer colIndex;
 
     public Nodo(T value) {
         this.value = value;
@@ -17,9 +18,9 @@ public class Nodo<T> {
         if (n == null)
             return new Nodo(elemento);
         else if (elemento.hashCode() < n.value.hashCode())
-            n.izquierda = insertar(n.izquierda, elemento);
+            n.leftNode = insertar(n.leftNode, elemento);
         else if (elemento.hashCode() > n.value.hashCode())
-            n.derecha = insertar(n.derecha, elemento);
+            n.rightNode = insertar(n.rightNode, elemento);
         return n;
     }
     
@@ -27,22 +28,38 @@ public class Nodo<T> {
         if (n == null)
             return 0;
         else {
-            if (n.izquierda != null && n.derecha != null)
-                return nodosCompletos(n.izquierda) + nodosCompletos(n.derecha) + 1;
-            return nodosCompletos(n.izquierda) + nodosCompletos(n.derecha);
+            if (n.leftNode != null && n.rightNode != null)
+                return nodosCompletos(n.leftNode) + nodosCompletos(n.rightNode) + 1;
+            return nodosCompletos(n.leftNode) + nodosCompletos(n.rightNode);
         }
     }
+
+    public Integer getColIndex() {
+        return colIndex;
+    }
+
+    public void setColIndex(Integer colIndex) {
+        this.colIndex = colIndex;
+    }
+    
+    public void setIzquierda(Nodo leftNode) {
+        this.leftNode = leftNode;
+    }
+
+    public void setDerecha(Nodo rightNode) {
+        this.rightNode = rightNode;
+    }  
 
     public T getValue() {
         return value;
     }
 
     public Nodo getIzquierda() {
-        return izquierda;
+        return leftNode;
     }
 
     public Nodo getDerecha() {
-        return derecha;
+        return rightNode;
     }
     
     public void setValue(T value){
