@@ -73,4 +73,11 @@ public class Nodo<T> {
     public void setWasUsed(boolean wasUsed) {
         this.wasUsed = wasUsed;
     } 
+
+    @Override
+    public String toString() {
+        return "Nodo{" + "value=" + value + ", wasUsed=" + wasUsed + ", colIndex=" + colIndex + '}';
+    }
+    
+    
 }

@@ -24,10 +24,16 @@ public class DataController {
     public Nodo<String>[][] getTreeRepresentation() {
         return treeRepresentation;
     }
+    
+    private void resetFields(){
+        letters = new ArrayList<>();
+        countLetters = new HashMap<>();
+    }
 
     public void initListeners() {
         menu.getBtnStart().addActionListener((e) -> {
             String input = menu.getInputMessage();
+            resetFields();
             findAllLetters(input);
             initTreeRepresentation();
             startProcces();
@@ -49,8 +55,6 @@ public class DataController {
             int value = countLetters.get(key);
             countLetters.put(key, ++value);
         }
-        System.out.println(letters.toString());
-        System.out.println(countLetters.toString());
     }
 
     private void initTreeRepresentation() {
@@ -66,6 +70,7 @@ public class DataController {
             } else {
                 temp.setValue("");
             }
+            temp.setColIndex(x);
             treeRepresentation[0][x] = temp;
         }
 
@@ -83,9 +88,6 @@ public class DataController {
                 treeRepresentation[i][j] = temp;
             }
         }
-        System.out.println("\n");
-        Util.printRepresentation(treeRepresentation);
-        System.out.println("--------------------------------------------------");
     }
 
     private Nodo<String> findMinFrequencie(Nodo<String>[] frecuencias) {
@@ -100,10 +102,11 @@ public class DataController {
             }
         }
         frecuencias[indexMinValue].setWasUsed(true);
-        System.out.println("Value of return " + frecuencias[indexMinValue].getValue());
         returnElement.setValue(frecuencias[indexMinValue].getValue());
+        returnElement.setColIndex(frecuencias[indexMinValue].getColIndex());
         return returnElement;
     }
+   
 
     private void startProcces() {
         for (int i = letters.size(); i < treeRepresentation[0].length; i++) {
@@ -115,39 +118,53 @@ public class DataController {
             Integer valueCurrentNode = Integer.parseInt(f1.getValue()) + Integer.parseInt(f2.getValue());
             Nodo<String> newNode = new Nodo<>();
             newNode.setValue(String.valueOf(valueCurrentNode));
-
+            newNode.setColIndex(i);
+            
+            //Estableciendo valor de los padres para las frecuencias
+            Nodo<String> auxNode = new Nodo<>(newNode.getColIndex()+"");
+            Nodo<String> firstType = new Nodo<>("1"),secondType = new Nodo<>("2");
+            
+            treeRepresentation[2][f1.getColIndex()] = auxNode;
+            treeRepresentation[2][f2.getColIndex()] = auxNode;
+            
+            //Estableciendo hijo izquierdo y derecho
             if (Integer.parseInt(f1.getValue()) > Integer.parseInt(f2.getValue())) {
-                f1.setValue(String.valueOf(letters.indexOf(f1.getValue())));
-                f2.setValue(String.valueOf(letters.indexOf(f2.getValue())));
+                f1.setValue(String.valueOf(f1.getColIndex()));
+                f2.setValue(String.valueOf(f2.getColIndex()));
                 
                 newNode.setDerecha(f1);
                 newNode.setIzquierda(f2);
-            } else if (Integer.parseInt(f2.getValue()) > Integer.parseInt(f1.getValue())) {
-                f1.setValue(String.valueOf(letters.indexOf(f1.getValue())));
-                f2.setValue(String.valueOf(letters.indexOf(f2.getValue())));
                 
-                //System.out.println("Index First Letter: " + letters.indexOf(f1.getValue()) + " Letter: "+f1.getValue() );
+                treeRepresentation[3][f1.getColIndex()] = secondType;
+                treeRepresentation[3][f2.getColIndex()] = firstType;
+                
+            } else if (Integer.parseInt(f2.getValue()) > Integer.parseInt(f1.getValue())) {
+                f1.setValue(String.valueOf(f1.getColIndex()));
+                f2.setValue(String.valueOf(f2.getColIndex()));
+                
+                treeRepresentation[3][f1.getColIndex()] = firstType;
+                treeRepresentation[3][f2.getColIndex()] = secondType;
+                
                 
                 newNode.setDerecha(f2);
                 newNode.setIzquierda(f1);
             } else {
-                f1.setValue(String.valueOf(letters.indexOf(f1.getValue())));
-                f2.setValue(String.valueOf(letters.indexOf(f2.getValue())));
+                f1.setValue(String.valueOf(f1.getColIndex()));
+                f2.setValue(String.valueOf(f2.getColIndex()));
                 
-                newNode.setDerecha(f1);
-                newNode.setIzquierda(f2);
+                treeRepresentation[3][f1.getColIndex()] = firstType;
+                treeRepresentation[3][f2.getColIndex()] = secondType;
+                
+                newNode.setDerecha(f2);
+                newNode.setIzquierda(f1);
             }
 
             treeRepresentation[1][i] = newNode;
-            treeRepresentation[3][i] = newNode.getIzquierda();
-            treeRepresentation[4][i] = newNode.getDerecha();
-
-            System.out.println("f1: " + f1.getValue() + " f2: " + f2.getValue());
+            treeRepresentation[4][i] = newNode.getIzquierda();
+            treeRepresentation[5][i] = newNode.getDerecha();
 
         }
-
-        System.out.println("\n");
-        Util.printRepresentation(treeRepresentation);
+        Util.showRepresentation(treeRepresentation);
 
     }
 

@@ -3,6 +3,7 @@ package utils;
 import models.Nodo;
 import java.util.Map;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class Util {
     
@@ -20,6 +21,22 @@ public class Util {
             }
             System.out.println("\n");
         }
+    }
+    
+    public static void showRepresentation(Nodo[][] matriz){
+        String result = "";
+        for(int x = 0; x < matriz[0].length;x++){
+           result += x+" ";  
+        }
+        result += "\n";
+        
+        for(int i = 0; i < matriz.length; i++){
+            for(int j = 0; j < matriz[i].length;j++){
+                    result += matriz[i][j].getValue()+" ";       
+            }
+            result += "\n";
+        }
+        JOptionPane.showMessageDialog(null, result);
     }
     
     public static void printArrayRepresentation(Nodo<String>[] frecuencias){
