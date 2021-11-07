@@ -1,15 +1,48 @@
 package utils;
 
-import models.Node;
+import models.Nodo;
+import java.util.Map;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class Util {
+    
+    public static Map<String,Integer> indices = new HashMap<>();
 
-    public static void printRepresentation(Node[][] matriz){
+    public static void printRepresentation(Nodo[][] matriz){
+        for(int x = 0; x < matriz[0].length;x++){
+            System.out.print(x+" ");  
+        }
+        System.out.println("\n");
+        
         for(int i = 0; i < matriz.length; i++){
             for(int j = 0; j < matriz[i].length;j++){
                 System.out.print(matriz[i][j].getValue()+" ");       
             }
             System.out.println("\n");
         }
+    }
+    
+    public static void showRepresentation(Nodo[][] matriz){
+        String result = "";
+        for(int x = 0; x < matriz[0].length;x++){
+           result += x+" ";  
+        }
+        result += "\n";
+        
+        for(int i = 0; i < matriz.length; i++){
+            for(int j = 0; j < matriz[i].length;j++){
+                    result += matriz[i][j].getValue()+" ";       
+            }
+            result += "\n";
+        }
+        JOptionPane.showMessageDialog(null, result);
+    }
+    
+    public static void printArrayRepresentation(Nodo<String>[] frecuencias){
+        for(Nodo<String> e : frecuencias){
+            System.out.print( e.getValue()+ " ");
+        }
+        System.out.println("\n");
     }
 }

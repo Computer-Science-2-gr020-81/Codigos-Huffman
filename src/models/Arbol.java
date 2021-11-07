@@ -1,25 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-/**
- *
- * @param <T>
- */
+
 public class Arbol<T> {
-    private Nodo raiz;
+    private Nodo<T> root;
     
-    public void insertar(T elemento) {
-        if (raiz == null)
-            raiz = new Nodo(elemento);
+    public void insert(T value) {
+        if (root == null)
+            root = new Nodo(root);
         else
-            raiz = raiz.insertar(raiz, elemento);
+            root = root.insertar(root, value);
     }
 
     public Nodo getRaiz() {
-        return raiz;
+        return root;
     }
 }

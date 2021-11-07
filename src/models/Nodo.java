@@ -1,29 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-/**
- *
- * @param <T>
- */
-public class Nodo<T> {
-    private T elemento;
-    private Nodo izquierda, derecha;
 
-    public Nodo(T elemento) {
-        this.elemento = elemento;
+public class Nodo<T> {
+    
+    private T value;
+    private Nodo leftNode, rightNode;
+    private boolean wasUsed;
+    private Integer colIndex;
+
+    public Nodo(T value) {
+        this.value = value;
     }
+    
+    public Nodo(){}
     
     public Nodo insertar(Nodo n, T elemento) {
         if (n == null)
             return new Nodo(elemento);
-        else if (elemento.hashCode() < n.elemento.hashCode())
-            n.izquierda = insertar(n.izquierda, elemento);
-        else if (elemento.hashCode() > n.elemento.hashCode())
-            n.derecha = insertar(n.derecha, elemento);
+        else if (elemento.hashCode() < n.value.hashCode())
+            n.leftNode = insertar(n.leftNode, elemento);
+        else if (elemento.hashCode() > n.value.hashCode())
+            n.rightNode = insertar(n.rightNode, elemento);
         return n;
     }
     
@@ -31,22 +28,56 @@ public class Nodo<T> {
         if (n == null)
             return 0;
         else {
-            if (n.izquierda != null && n.derecha != null)
-                return nodosCompletos(n.izquierda) + nodosCompletos(n.derecha) + 1;
-            return nodosCompletos(n.izquierda) + nodosCompletos(n.derecha);
+            if (n.leftNode != null && n.rightNode != null)
+                return nodosCompletos(n.leftNode) + nodosCompletos(n.rightNode) + 1;
+            return nodosCompletos(n.leftNode) + nodosCompletos(n.rightNode);
         }
     }
 
-    public T getElemento() {
-        return elemento;
+    public Integer getColIndex() {
+        return colIndex;
+    }
+
+    public void setColIndex(Integer colIndex) {
+        this.colIndex = colIndex;
+    }
+    
+    public void setIzquierda(Nodo leftNode) {
+        this.leftNode = leftNode;
+    }
+
+    public void setDerecha(Nodo rightNode) {
+        this.rightNode = rightNode;
+    }  
+
+    public T getValue() {
+        return value;
     }
 
     public Nodo getIzquierda() {
-        return izquierda;
+        return leftNode;
     }
 
     public Nodo getDerecha() {
-        return derecha;
+        return rightNode;
     }
+    
+    public void setValue(T value){
+        this.value = value;
+    }
+
+    public boolean isWasUsed() {
+        return wasUsed;
+    }
+
+    public void setWasUsed(boolean wasUsed) {
+        this.wasUsed = wasUsed;
+    } 
+
+    @Override
+    public String toString() {
+        return "Nodo{" + "value=" + value + ", wasUsed=" + wasUsed + ", colIndex=" + colIndex + '}';
+    }
+    
     
 }
