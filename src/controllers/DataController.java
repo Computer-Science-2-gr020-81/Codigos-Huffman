@@ -138,7 +138,7 @@ public class DataController {
                 treeRepresentation[3][f1.getColIndex()] = secondType;
                 treeRepresentation[3][f2.getColIndex()] = firstType;
                 
-            } else if (Integer.parseInt(f2.getValue()) > Integer.parseInt(f1.getValue())) {
+            } else{
                 f1.setValue(String.valueOf(f1.getColIndex()));
                 f2.setValue(String.valueOf(f2.getColIndex()));
                 
@@ -148,16 +148,7 @@ public class DataController {
                 
                 newNode.setDerecha(f2);
                 newNode.setIzquierda(f1);
-            } else {
-                f1.setValue(String.valueOf(f1.getColIndex()));
-                f2.setValue(String.valueOf(f2.getColIndex()));
-                
-                treeRepresentation[3][f1.getColIndex()] = firstType;
-                treeRepresentation[3][f2.getColIndex()] = secondType;
-                
-                newNode.setDerecha(f2);
-                newNode.setIzquierda(f1);
-            }
+            } 
 
             treeRepresentation[1][i] = newNode;
             treeRepresentation[4][i] = newNode.getIzquierda();
