@@ -1,11 +1,14 @@
 package views;
 
 import controllers.Controlador;
+import controllers.ControllerMatriz;
 import controllers.DataController;
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import models.Arbol;
@@ -14,6 +17,7 @@ import models.Arbol;
 public class MenuN extends javax.swing.JFrame {
     
     private DataController dataController;
+    private ControllerMatriz matrizController;
     private JTable matriz;
     private JScrollPane dibujoMatriz;
 
@@ -22,6 +26,8 @@ public class MenuN extends javax.swing.JFrame {
         initTemplate();
         dataController = new DataController(this);
         dataController.initListeners();
+        
+        matrizController = new ControllerMatriz(this);
     }
     
     public JButton getBtnStart(){
@@ -175,9 +181,21 @@ public class MenuN extends javax.swing.JFrame {
 
     private void MatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatrizActionPerformed
         try{
+            String[][] rowData = matrizController.retornoMatriz();
+            String[] colNames = matrizController.getArreglo();
+            
+            matriz = new JTable(rowData,colNames);
+            matriz.setSize(new Dimension(dibujoMatriz.getWidth()-100,dibujoMatriz.getHeight()-100));
+            matriz.setLocation(0, 10);
+            
+            dibujoMatriz.add(matriz);
+            
+            dibujoMatriz.updateUI();
+            dibujoMatriz.repaint();
+            repaint();
              
         }catch(Exception e){
-            
+            JOptionPane.showMessageDialog(null, "Error:  " + e.getMessage());
         }
     }//GEN-LAST:event_MatrizActionPerformed
     public DataController getDataController(){
@@ -196,13 +214,14 @@ public class MenuN extends javax.swing.JFrame {
         dibujoMatriz.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         Panel.add(dibujoMatriz);
     }
+    
     public JTable getTabla(){
         return matriz;
-}
+    }
+    
     public JScrollPane getScroolPane(){
         return dibujoMatriz;
     }
-        
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

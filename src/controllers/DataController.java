@@ -155,7 +155,6 @@ public class DataController {
             treeRepresentation[5][i] = newNode.getDerecha();
 
         }
-        Util.showRepresentation(treeRepresentation);
 
     }
 
