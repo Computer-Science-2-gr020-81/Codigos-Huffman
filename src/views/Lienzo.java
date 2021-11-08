@@ -5,42 +5,50 @@
  */
 package views;
 
-import java.awt.Graphics;
+
 import javax.swing.JPanel;
+import java.awt.Graphics;
 import models.Arbol;
 import models.Nodo;
 
-
 public class Lienzo extends JPanel {
-    private Arbol objArbol;
-    public static final int DIAMETRO = 30;
-    public static final int RADIO = DIAMETRO / 2;
-    public static final int ANCHO = 50;
 
-    public void setObjArbol(Arbol objArbol) {
-        this.objArbol = objArbol;
+    private Arbol arbol;
+    private static int ancho = 60, diametro = 30, radio = diametro / 2;
+    //Diametro de los nodos, radio, ancho de separación entre los nodos
+
+    
+
+    public void setArbol(Arbol arbol) {
+        this.arbol = arbol;
         repaint();
+    }
+
+    public void pintar(Graphics g, int x, int y, Nodo raiz) {
+        if (raiz != null) {
+            int extra = raiz.nodosCompletos(raiz) * (ancho / 2); //Espacio extra para que los nodos no queden pegados
+            g.drawOval(x, y, diametro, diametro); //Dibujar el nodo
+            g.drawString(String.valueOf(raiz.getValue()), x+5, y + 18); //Dibujar el valor del nodo
+            
+            //Dibujar lineas izquierda y derecha
+            if (raiz.getIzquierda()!= null) {
+                g.drawLine(x+radio, y+radio, x - ancho - extra + radio, y + ancho + radio);
+            }
+            if (raiz.getDerecha()!= null) {
+                g.drawLine(x + radio, y + radio, x + ancho + extra + radio, y + ancho + radio);
+            }
+            
+            //Llamadas recursivas para dibujar a los hijos
+            pintar(g, x - ancho - extra, y + ancho, raiz.getIzquierda());
+            pintar(g, x + ancho + extra, y + ancho, raiz.getDerecha());
+        }
+
     }
 
     @Override
     public void paint(Graphics g) {
-        super.paint(g); //To change body of generated methods, choose Tools | Templates.
-        pintar(g, getWidth() / 2, 20, objArbol.getRaiz());
+        super.paint(g);
+         pintar(g, (getWidth() / 2), 20, arbol.getRaiz());
     }
-    
-    private void pintar(Graphics g, int x, int y, Nodo n) {
-        if (n == null)
-        {}
-        else {
-            int EXTRA = n.nodosCompletos(n) * (ANCHO / 2);
-            g.drawOval(x, y, DIAMETRO, DIAMETRO);
-            g.drawString(n.getValue().toString(), x + 12, y + 18);
-            if (n.getIzquierda() != null)
-                g.drawLine(x+RADIO, y+RADIO+15, x-ANCHO-EXTRA+RADIO+15, y+ANCHO+RADIO);
-            if (n.getDerecha() != null)
-                g.drawLine(x+RADIO, y+RADIO+15, x+ANCHO+EXTRA+RADIO-15, y+ANCHO+RADIO);
-            pintar(g,x-ANCHO-EXTRA, y+ ANCHO, n.getIzquierda());
-            pintar(g,x+ANCHO+EXTRA, y+ ANCHO, n.getDerecha());
-        }
-    }
+
 }

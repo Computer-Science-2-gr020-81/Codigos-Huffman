@@ -45,4 +45,22 @@ public class Util {
         }
         System.out.println("\n");
     }
+    
+    public static Nodo<String>[][] cloneTreeRepresentation(Nodo<String> [][] tree){
+        Nodo<String>[][] treeCloned = new Nodo[tree.length][tree[0].length];
+        for(int i = 0; i < tree.length;i++){
+            for(int j = 0; j < tree[i].length;j++){
+                Nodo<String> temp = new Nodo<>();
+                temp.setColIndex(tree[i][j].getColIndex());
+                temp.setValue(tree[i][j].getValue());
+                temp.setWasUsed(tree[i][j].isWasUsed());
+                temp.setDerecha(tree[i][j].getDerecha());
+                temp.setIzquierda(tree[i][j].getIzquierda());
+                treeCloned[i][j] = temp;
+            }
+        }
+        
+        return treeCloned;
+        
+    }
 }

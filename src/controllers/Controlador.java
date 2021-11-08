@@ -22,6 +22,6 @@ public class Controlador {
     }
     
     public void iniciar() {
-        objLienzo.setObjArbol(objArbol);
+        objLienzo.setArbol(objArbol);
     }
 }

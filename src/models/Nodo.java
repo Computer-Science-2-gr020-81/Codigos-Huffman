@@ -33,6 +33,22 @@ public class Nodo<T> {
             return nodosCompletos(n.leftNode) + nodosCompletos(n.rightNode);
         }
     }
+    
+     public Nodo<T> returnNodo(T x) {
+        Nodo<T> q, p = this;
+        
+        q = null;
+        while (p != null) {
+            if (x.hashCode() < p.getValue().hashCode()) {
+                p = p.getIzquierda();
+            } else if (x.hashCode() > p.getValue().hashCode()) {
+                p = p.getDerecha();
+            } else {
+                return p;
+            }
+        }
+        return null;
+    }
 
     public Integer getColIndex() {
         return colIndex;
@@ -76,8 +92,9 @@ public class Nodo<T> {
 
     @Override
     public String toString() {
-        return "Nodo{" + "value=" + value + ", wasUsed=" + wasUsed + ", colIndex=" + colIndex + '}';
+        return "Nodo{" + "value=" + value + ", leftNode=" + leftNode + ", rightNode=" + rightNode + ", wasUsed=" + wasUsed + ", colIndex=" + colIndex + '}';
     }
+
     
     
 }

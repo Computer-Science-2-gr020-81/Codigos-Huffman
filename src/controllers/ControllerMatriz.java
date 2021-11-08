@@ -16,7 +16,7 @@ public class ControllerMatriz {
     }
     
     public String[][] retornoMatriz(){
-         Nodo<String>[][] matrizNodos= menu.getDataController().getTreeRepresentation();
+         Nodo<String>[][] matrizNodos = menu.getDataController().getTreeRepresentation();
          String[][] matrizString= new String[matrizNodos.length][matrizNodos[0].length];
          for(int i=0; i<matrizNodos.length;i++){
              for(int j=0;j<matrizNodos[0].length;j++){

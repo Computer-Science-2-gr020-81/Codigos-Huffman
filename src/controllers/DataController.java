@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 import views.MenuN;
 import models.Nodo;
@@ -20,6 +21,10 @@ public class DataController {
     public DataController(MenuN menu) {
         this.menu = menu;
     }
+    
+    public List<String> getLetters(){
+        return letters;
+    }
 
     public Nodo<String>[][] getTreeRepresentation() {
         return treeRepresentation;
@@ -30,13 +35,18 @@ public class DataController {
         countLetters = new HashMap<>();
     }
 
-    public void initListeners() {
-        menu.getBtnStart().addActionListener((e) -> {
+    public void initListeners(){
+        menu.getBtnStart().addActionListener((e)  -> {
             String input = menu.getInputMessage();
-            resetFields();
-            findAllLetters(input);
-            initTreeRepresentation();
-            startProcces();
+            if(input.equals("") || input.equals(" ")){
+                JOptionPane.showMessageDialog(null, "La cadena no puede ser vacia", "Error",JOptionPane.ERROR_MESSAGE);
+            }else{
+                resetFields();
+                findAllLetters(input);
+                initTreeRepresentation();
+                startProcces();
+            }
+           
         });
     }
 
@@ -155,6 +165,7 @@ public class DataController {
             treeRepresentation[5][i] = newNode.getDerecha();
 
         }
+        Util.showRepresentation(treeRepresentation);
 
     }
 
