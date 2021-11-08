@@ -17,7 +17,6 @@ public class DrawTree extends JFrame {
         ancho = 1000;
         alto = 800;
         this.drawTreeController = drawTreeController;
-        drawTreeController.setDrawTreeController(this);
     }
 
     private void initComponents() {

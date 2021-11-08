@@ -26,7 +26,6 @@ public class MenuN extends JFrame {
         initTemplate();
         dataController = new DataController(this);
         dataController.initListeners();
-
         matrizController = new ControllerMatriz(this);
     }
 
@@ -110,7 +109,7 @@ public class MenuN extends JFrame {
                     .addComponent(Texto)
                     .addComponent(Arbol)
                     .addComponent(Matriz))
-                .addContainerGap(483, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,7 +126,7 @@ public class MenuN extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(438, 438, 438))
         );
 
         pack();
@@ -138,26 +137,6 @@ public class MenuN extends JFrame {
     }//GEN-LAST:event_TextoActionPerformed
 
     private void ArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolActionPerformed
-        /*//PATRON MVC
-        Arbol objArbol = new Arbol(); //MODELO
-        Lienzo objLienzo = new Lienzo(); //VISTA
-        Controlador objControlador = new Controlador(objLienzo, objArbol); //CONTROLADOR
-        //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-        //INSERTAR Y PINTAR ARBOL
-        objArbol.insert(7);
-        objArbol.insert(2);
-        objArbol.insert(9);
-        objArbol.insert(5);
-        objArbol.insert(0);
-        objArbol.insert(10);
-        objControlador.iniciar();
-        //= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-        //MOSTRAR LIENZO EN UNA VENTANA TODO
-        JFrame ventana = new JFrame();
-        ventana.getContentPane().add(objLienzo);
-     //   ventana.setDefaultCloseOperation(3);
-        ventana.setSize(600, 600);
-        ventana.setVisible(true);*/
         try {
             DrawTreeController drawController = new DrawTreeController();
             drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
@@ -168,7 +147,6 @@ public class MenuN extends JFrame {
             draw.initTemplate();
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Asegurese de tener datos registrados en la aplicación", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
 
     }//GEN-LAST:event_ArbolActionPerformed
@@ -203,7 +181,6 @@ public class MenuN extends JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Asegurese de tener datos registrados en la aplicación", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }//GEN-LAST:event_MatrizActionPerformed
     public DataController getDataController() {
