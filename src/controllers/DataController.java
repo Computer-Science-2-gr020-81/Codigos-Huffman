@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import views.MenuN;
 import models.Nodo;
-import utils.Util;
 
 public class DataController {
 
@@ -165,7 +164,6 @@ public class DataController {
             treeRepresentation[5][i] = newNode.getDerecha();
 
         }
-        Util.showRepresentation(treeRepresentation);
 
     }
 

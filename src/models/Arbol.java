@@ -7,6 +7,7 @@ public class Arbol<T> {
 
     private Nodo<T> raiz;
     private ArrayList<T> in, pre, pos;
+    private ArrayList<Nodo<T>> inNodes = new ArrayList<>();
 
     public Arbol() {
         raiz = null;
@@ -85,6 +86,16 @@ public class Arbol<T> {
         }
         return 1;
     }
+    
+    public void insertarNodoPorPosicion(Nodo<T> r,int colIndex,boolean isLeft){
+        Nodo<T> padre = returnNodeByColIndex(colIndex);
+        //System.out.println("Padre: " + padre);
+        if(isLeft){
+            padre.setIzquierda(r);
+        }else{
+            padre.setDerecha(r);
+        }
+    }
 
     public void retirarNodo(T x) {
         Nodo p = returnNodo(x);
@@ -125,6 +136,7 @@ public class Arbol<T> {
         if (r != null) {
             inOrden(r.getIzquierda());
             in.add(r.getValue());
+            inNodes.add(r);
             inOrden(r.getDerecha());
         }
     }
@@ -279,10 +291,7 @@ public class Arbol<T> {
                 p = p.getIzquierda();
             } else if (x.hashCode() > p.getValue().hashCode()) {
                 p = p.getDerecha();
-            } else {
-                System.out.println("\n");
-                System.out.println("Retornado: " + p);
-                System.out.println("\n");
+            } else if(x.equals(p.getValue())) {
                 return p;
             }
         }
@@ -290,19 +299,10 @@ public class Arbol<T> {
     }
     
     public Nodo<T> returnNodeByColIndex(int colIndex){
-        Nodo<T> q, p = raiz;
-
-        if (raiz == null) {
-            return null;
-        }
-        q = null;
-        while (p != null) {
-            if (colIndex < p.getColIndex()) {
-                p = p.getIzquierda();
-            } else if (colIndex > p.getColIndex()) {
-                p = p.getDerecha();
-            } else {
-                return p;
+        inOrden(raiz);
+        for(int i = 0; i < inNodes.size(); i++){
+            if(colIndex == inNodes.get(i).getColIndex()){
+               return inNodes.get(i);
             }
         }
         return null;

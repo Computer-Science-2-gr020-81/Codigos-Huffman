@@ -49,7 +49,6 @@ public class MenuN extends JFrame {
         Texto = new javax.swing.JButton();
         Arbol = new javax.swing.JButton();
         Matriz = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,13 +77,6 @@ public class MenuN extends JFrame {
             }
         });
 
-        jButton1.setText("Limpiar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
@@ -102,9 +94,7 @@ public class MenuN extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Matriz)
                         .addGap(10, 10, 10)))
-                .addGap(40, 40, 40)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,8 +109,7 @@ public class MenuN extends JFrame {
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Texto)
                     .addComponent(Arbol)
-                    .addComponent(Matriz)
-                    .addComponent(jButton1))
+                    .addComponent(Matriz))
                 .addContainerGap(483, Short.MAX_VALUE))
         );
 
@@ -217,14 +206,6 @@ public class MenuN extends JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_MatrizActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dibujoMatriz.remove(matriz);
-        Panel.remove(dibujoMatriz);
-        
-        Panel.repaint();
-        repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
     public DataController getDataController() {
         return dataController;
     }
@@ -250,7 +231,6 @@ public class MenuN extends JFrame {
     private javax.swing.JButton Matriz;
     private javax.swing.JPanel Panel;
     private javax.swing.JButton Texto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
