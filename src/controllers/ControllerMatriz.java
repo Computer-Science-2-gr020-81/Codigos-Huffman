@@ -18,15 +18,19 @@ public class ControllerMatriz {
     
     public String[][] retornoMatriz(){
          Nodo<String>[][] matrizNodos= menu.getDataController().getTreeRepresentation();
-         String[][] matrizString= new String[matrizNodos.length+1][matrizNodos[0].length];
-         for(int i=0; i<matrizNodos.length;i++){
-             for(int j=0;j<matrizNodos[0].length;j++){
+         String[][] matrizString= new String[matrizNodos.length+1][matrizNodos[0].length+1];
+         matrizString[0][0] = "";
+         
+         for(int x = 1; x < matrizNodos[0].length;x++){
+             matrizString[0][x] = String.valueOf(x-1);
+         }
+         
+         for(int i=1; i<matrizString.length;i++){
+             for(int j=0;j<matrizString[0].length;j++){
                  if(j==0){
-                     matrizString[i][j]=titulos[i];
-                 }else if(i==0){
-                     matrizString[i][j]=String.valueOf(j);
+                     matrizString[i][j]=titulos[i-1];
                  }else{
-                     matrizString[i][j]=matrizNodos[i][j].getValue();
+                     matrizString[i][j]=matrizNodos[i-1][j-1].getValue();
                  
              }
          }
