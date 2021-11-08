@@ -4,6 +4,7 @@ import controllers.Controlador;
 import controllers.ControllerMatriz;
 import controllers.DataController;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -11,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import models.Arbol;
 
 
@@ -49,7 +53,6 @@ public class MenuN extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         Texto = new javax.swing.JButton();
         Arbol = new javax.swing.JButton();
-        Porcentaje = new javax.swing.JButton();
         Matriz = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,13 +75,6 @@ public class MenuN extends javax.swing.JFrame {
             }
         });
 
-        Porcentaje.setText("Porcentajes de ahorro y almacenamiento");
-        Porcentaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PorcentajeActionPerformed(evt);
-            }
-        });
-
         Matriz.setText("Escribir Matriz");
         Matriz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,22 +88,18 @@ public class MenuN extends javax.swing.JFrame {
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(455, 455, 455)
-                        .addComponent(Porcentaje))
-                    .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField1)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                            .addComponent(Texto)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                            .addComponent(Arbol)
-                            .addGap(72, 72, 72)
-                            .addComponent(Matriz)
-                            .addGap(10, 10, 10))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addComponent(Texto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(Arbol)
+                        .addGap(72, 72, 72)
+                        .addComponent(Matriz)
+                        .addGap(10, 10, 10)))
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,9 +115,7 @@ public class MenuN extends javax.swing.JFrame {
                     .addComponent(Texto)
                     .addComponent(Arbol)
                     .addComponent(Matriz))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(Porcentaje)
-                .addGap(400, 400, 400))
+                .addContainerGap(459, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,29 +165,51 @@ public class MenuN extends javax.swing.JFrame {
         ventana.setVisible(true);
     }//GEN-LAST:event_ArbolActionPerformed
 
-    private void PorcentajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PorcentajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PorcentajeActionPerformed
-
     private void MatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatrizActionPerformed
         try{
+            try {
             String[][] rowData = matrizController.retornoMatriz();
             String[] colNames = matrizController.getArreglo();
             
-            matriz = new JTable(rowData,colNames);
-            matriz.setSize(new Dimension(dibujoMatriz.getWidth()-100,dibujoMatriz.getHeight()-100));
-            matriz.setLocation(0, 10);
+            dibujoMatriz = new JScrollPane();
+            dibujoMatriz.setSize(Panel.getWidth()-50, 430);
+            dibujoMatriz.setLocation(20, 180);
+            dibujoMatriz.setBorder(BorderFactory.createLineBorder(Color.RED));
+            dibujoMatriz.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+            dibujoMatriz.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            Panel.add(dibujoMatriz);
+
+            matriz = new JTable(rowData, colNames);
+            matriz.setSize(new Dimension(dibujoMatriz.getWidth()+0,dibujoMatriz.getHeight()+0));
+            for(int i=0;i<matrizController.getArreglo().length;i++){
+                TableColumn columna;
+                columna=matriz.getColumnModel().getColumn(i);
+                columna.setPreferredWidth(30);
+                columna.setMaxWidth(30);
+                columna.setMinWidth(30);
+                matriz.setRowHeight(25);
+            }
             
+            
+           // matriz.setColumnModel(columna);
+            matriz.setLocation(0, 0);
+
             dibujoMatriz.add(matriz);
-            
-            dibujoMatriz.updateUI();
+
             dibujoMatriz.repaint();
             repaint();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Asegurese de tener datos registrados en la aplicación", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
              
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "Error:  " + e.getMessage());
         }
     }//GEN-LAST:event_MatrizActionPerformed
+    
+
     public DataController getDataController(){
         return dataController;
     }
@@ -206,13 +218,7 @@ public class MenuN extends javax.swing.JFrame {
         setTitle("Condigos de Huffman");
         setLocationRelativeTo(null);
         setResizable(false);
-        dibujoMatriz= new JScrollPane();
-        dibujoMatriz.setBounds(20, 180,450, 430);
-        dibujoMatriz.setBackground(Color.red);
-        dibujoMatriz.setBorder(BorderFactory.createLineBorder(Color.red));
-        dibujoMatriz.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        dibujoMatriz.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        Panel.add(dibujoMatriz);
+        
     }
     
     public JTable getTabla(){
@@ -228,7 +234,6 @@ public class MenuN extends javax.swing.JFrame {
     private javax.swing.JButton Arbol;
     private javax.swing.JButton Matriz;
     private javax.swing.JPanel Panel;
-    private javax.swing.JButton Porcentaje;
     private javax.swing.JButton Texto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
