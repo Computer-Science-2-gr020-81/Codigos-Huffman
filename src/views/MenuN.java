@@ -180,22 +180,26 @@ public class MenuN extends javax.swing.JFrame {
             Panel.add(dibujoMatriz);
 
             matriz = new JTable(rowData, colNames);
-            matriz.setSize(new Dimension(dibujoMatriz.getWidth()+0,dibujoMatriz.getHeight()+0));
+            matriz.setSize(new Dimension(dibujoMatriz.getWidth(),dibujoMatriz.getHeight()));
             for(int i=0;i<matrizController.getArreglo().length;i++){
                 TableColumn columna;
                 columna=matriz.getColumnModel().getColumn(i);
-                columna.setPreferredWidth(30);
-                columna.setMaxWidth(30);
-                columna.setMinWidth(30);
-                matriz.setRowHeight(25);
+                if(i==0){
+                    columna.setPreferredWidth(80);
+                    columna.setMaxWidth(80);
+                    columna.setMinWidth(80);
+                    matriz.setRowHeight(25);
+                }else{
+                    columna.setPreferredWidth(30);
+                    columna.setMaxWidth(30);
+                    columna.setMinWidth(30);
+                    matriz.setRowHeight(25);
+                }
+                
+                
             }
-            
-            
-           // matriz.setColumnModel(columna);
             matriz.setLocation(0, 0);
-
             dibujoMatriz.add(matriz);
-
             dibujoMatriz.repaint();
             repaint();
 
