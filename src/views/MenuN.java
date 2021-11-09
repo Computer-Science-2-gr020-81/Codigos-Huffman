@@ -79,6 +79,11 @@ public class MenuN extends JFrame {
         });
 
         btnResults.setText("Mostrar Resultados");
+        btnResults.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResultsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
@@ -201,6 +206,11 @@ public class MenuN extends JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_MatrizActionPerformed
+
+    private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultsActionPerformed
+        
+        
+    }//GEN-LAST:event_btnResultsActionPerformed
     public DataController getDataController() {
         return dataController;
     }

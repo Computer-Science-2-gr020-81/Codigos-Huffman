@@ -7,7 +7,32 @@ public class Nodo<T> {
     private Nodo leftNode, rightNode;
     private boolean wasUsed;
     private Integer colIndex;
+    private String HuffmanCode = null;
 
+    public Nodo getLeftNode() {
+        return leftNode;
+    }
+
+    public void setLeftNode(Nodo leftNode) {
+        this.leftNode = leftNode;
+    }
+
+    public Nodo getRightNode() {
+        return rightNode;
+    }
+
+    public void setRightNode(Nodo rightNode) {
+        this.rightNode = rightNode;
+    }
+
+    public String getHuffmanCode() {
+        return HuffmanCode;
+    }
+
+    public void setHuffmanCode(String HuffmanCode) {
+        this.HuffmanCode = HuffmanCode;
+    }     
+    
     public Nodo(T value) {
         this.value = value;
     }

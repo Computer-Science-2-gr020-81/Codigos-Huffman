@@ -66,6 +66,17 @@ public class DataController {
         }
     }
 
+    public void findHuffmanCode(Nodo nodeList){
+        if(nodeList != null){
+            if(nodeList.getLeftNode() == null && nodeList.getRightNode() == null){
+                nodeList.setHuffmanCode("");
+            }else{
+                findHuffmanCode(nodeList.getLeftNode());
+                findHuffmanCode(nodeList.getRightNode());
+            }
+        }
+    }
+    
     private void initTreeRepresentation() {
         int sizeCol = (letters.size() * 2) - 1;
         this.treeRepresentation = new Nodo[6][sizeCol];
