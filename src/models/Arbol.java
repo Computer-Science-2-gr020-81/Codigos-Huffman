@@ -96,6 +96,28 @@ public class Arbol<T> {
             padre.setDerecha(r);
         }
     }
+    
+    public String getCode(T x){
+        Nodo<T> q, p = raiz;
+        String data = "";
+
+        if (raiz == null) {
+            return null;
+        }
+        q = null;
+        while (p != null) {
+            if (x.hashCode() < p.getValue().hashCode()) {
+                p = p.getIzquierda();
+                data += "0";
+            } else if (x.hashCode() > p.getValue().hashCode()) {
+                p = p.getDerecha();
+                data += "1";
+            } else if(x.equals(p.getValue())) {
+                return data;
+            }
+        }
+        return null;
+    }
 
     public void retirarNodo(T x) {
         Nodo p = returnNodo(x);

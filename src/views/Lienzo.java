@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 
+import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import models.Arbol;
@@ -16,7 +12,6 @@ public class Lienzo extends JPanel {
     private Arbol arbol;
     private static int ancho = 60, diametro = 30, radio = diametro / 2;
     //Diametro de los nodos, radio, ancho de separación entre los nodos
-
     
 
     public void setArbol(Arbol arbol) {
@@ -26,9 +21,10 @@ public class Lienzo extends JPanel {
 
     public void pintar(Graphics g, int x, int y, Nodo raiz) {
         if (raiz != null) {
+            g.setFont(new Font("Arial",Font.PLAIN,22));
             int extra = raiz.nodosCompletos(raiz) * (ancho / 2); //Espacio extra para que los nodos no queden pegados
             g.drawOval(x, y, diametro, diametro); //Dibujar el nodo
-            g.drawString(String.valueOf(raiz.getValue()), x+5, y + 18); //Dibujar el valor del nodo
+            g.drawString(String.valueOf(raiz.getValue()), x+12, y + 18); //Dibujar el valor del nodo
             
             //Dibujar lineas izquierda y derecha
             if (raiz.getIzquierda()!= null) {

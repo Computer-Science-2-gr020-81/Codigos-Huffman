@@ -4,10 +4,10 @@ import models.Nodo;
 import views.MenuN;
 
 
-public class ControllerMatriz {
+public class MatrizController {
     private MenuN menu;
     private String[] arreglo;
-    public ControllerMatriz(MenuN menu){
+    public MatrizController(MenuN menu){
         this.menu=menu;
     }
     

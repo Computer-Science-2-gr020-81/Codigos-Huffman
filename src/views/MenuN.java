@@ -1,6 +1,6 @@
 package views;
 
-import controllers.ControllerMatriz;
+import controllers.MatrizController;
 import controllers.DataController;
 import controllers.DrawTreeController;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class MenuN extends JFrame {
 
     private DataController dataController;
-    private ControllerMatriz matrizController;
+    private MatrizController matrizController;
     private JTable matriz = new JTable();
     private JScrollPane dibujoMatriz = new JScrollPane();
 
@@ -26,7 +26,7 @@ public class MenuN extends JFrame {
         initTemplate();
         dataController = new DataController(this);
         dataController.initListeners();
-        matrizController = new ControllerMatriz(this);
+        matrizController = new MatrizController(this);
     }
 
     public JButton getBtnStart() {
@@ -48,6 +48,8 @@ public class MenuN extends JFrame {
         Texto = new javax.swing.JButton();
         Arbol = new javax.swing.JButton();
         Matriz = new javax.swing.JButton();
+        btnResults = new javax.swing.JButton();
+        lblResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,7 +57,7 @@ public class MenuN extends JFrame {
 
         jLabel2.setText("Digite el Mensaje (solo se aceptan caracteres de la 'a' a la 'z'):");
 
-        Texto.setText("Enviar Mensaje");
+        Texto.setText("Procesar Entarda");
         Texto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextoActionPerformed(evt);
@@ -76,24 +78,30 @@ public class MenuN extends JFrame {
             }
         });
 
+        btnResults.setText("Mostrar Resultados");
+
         javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
         Panel.setLayout(PanelLayout);
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PanelLayout.createSequentialGroup()
                         .addComponent(Texto)
-                        .addGap(52, 52, 52)
+                        .addGap(55, 55, 55)
                         .addComponent(Arbol)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addComponent(Matriz)
-                        .addGap(10, 10, 10)))
-                .addContainerGap(262, Short.MAX_VALUE))
+                        .addGap(76, 76, 76)))
+                .addComponent(btnResults)
+                .addGap(42, 42, 42))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,17 +116,24 @@ public class MenuN extends JFrame {
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Texto)
                     .addComponent(Arbol)
-                    .addComponent(Matriz))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(Matriz)
+                    .addComponent(btnResults))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        lblResult.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,7 +141,9 @@ public class MenuN extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(438, 438, 438))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -156,9 +173,10 @@ public class MenuN extends JFrame {
             String[][] rowData = matrizController.retornoMatriz();
             String[] colNames = matrizController.getArreglo();
 
-            System.out.println(rowData[1][1]);
+            TableRepresentation table = new TableRepresentation();
+            table.initTemplate(rowData, colNames);
 
-            dibujoMatriz = new JScrollPane();
+            /*dibujoMatriz = new JScrollPane();
             dibujoMatriz.setSize(Panel.getWidth() - 50, 430);
             dibujoMatriz.setLocation(20, 180);
             dibujoMatriz.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -177,10 +195,10 @@ public class MenuN extends JFrame {
             dibujoMatriz.repaint();
             Panel.updateUI();
             Panel.repaint();
-            repaint();
-
+            repaint();*/
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Asegurese de tener datos registrados en la aplicación", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_MatrizActionPerformed
     public DataController getDataController() {
@@ -208,8 +226,10 @@ public class MenuN extends JFrame {
     private javax.swing.JButton Matriz;
     private javax.swing.JPanel Panel;
     private javax.swing.JButton Texto;
+    private javax.swing.JButton btnResults;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblResult;
     // End of variables declaration//GEN-END:variables
 }
