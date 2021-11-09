@@ -174,14 +174,14 @@ public class MenuN extends JFrame {
             String[] colNames = matrizController.getArreglo();
 
             TableRepresentation table = new TableRepresentation();
-            table.initTemplate(rowData, colNames);
-
+            table.initTemplate(rowData, colNames);            
+            
             /*dibujoMatriz = new JScrollPane();
             dibujoMatriz.setSize(Panel.getWidth() - 50, 430);
             dibujoMatriz.setLocation(20, 180);
             dibujoMatriz.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
             dibujoMatriz.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+            
             matriz = new JTable();
             matriz.setModel(new DefaultTableModel(rowData, colNames));
             dibujoMatriz.setViewportView(matriz);
