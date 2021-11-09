@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import models.Nodo;
 
 public class MenuN extends JFrame {
 
@@ -19,7 +20,7 @@ public class MenuN extends JFrame {
     private MatrizController matrizController;
     private JTable matriz = new JTable();
     private JScrollPane dibujoMatriz = new JScrollPane();
-
+    private DrawTreeController drawController;
     ;
 
     public MenuN() {
@@ -155,16 +156,14 @@ public class MenuN extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoActionPerformed
-
+            this.drawController = new DrawTreeController();
+            drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
+            drawController.setLetters(dataController.getLetters());
+            drawController.generateTree();
     }//GEN-LAST:event_TextoActionPerformed
 
     private void ArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolActionPerformed
         try {
-            DrawTreeController drawController = new DrawTreeController();
-            drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
-            drawController.setLetters(dataController.getLetters());
-            drawController.generateTree();
-
             DrawTree draw = new DrawTree(drawController);
             draw.initTemplate();
         } catch (NullPointerException e) {
@@ -208,8 +207,7 @@ public class MenuN extends JFrame {
     }//GEN-LAST:event_MatrizActionPerformed
 
     private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultsActionPerformed
-        
-        
+        dataController.findHuffmanCode(drawController.getLogicTree().getRaiz(),"");
     }//GEN-LAST:event_btnResultsActionPerformed
     public DataController getDataController() {
         return dataController;

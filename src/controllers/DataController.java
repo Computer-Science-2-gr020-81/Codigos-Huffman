@@ -66,13 +66,15 @@ public class DataController {
         }
     }
 
-    public void findHuffmanCode(Nodo nodeList){
+    public void findHuffmanCode(Nodo nodeList, String code){
         if(nodeList != null){
             if(nodeList.getLeftNode() == null && nodeList.getRightNode() == null){
-                nodeList.setHuffmanCode("");
-            }else{
-                findHuffmanCode(nodeList.getLeftNode());
-                findHuffmanCode(nodeList.getRightNode());
+                nodeList.setHuffmanCode(code);
+                System.out.println("Node: "+nodeList.getValue());
+                System.out.println("code: "+code);
+            }else{  
+                findHuffmanCode(nodeList.getLeftNode(),code+0);
+                findHuffmanCode(nodeList.getRightNode(),code+1);
             }
         }
     }
