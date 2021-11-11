@@ -83,7 +83,8 @@ public class ResultsController {
             finalCode += nodo.getHuffmanCode()+" ";
             
         }
-       
+        String[] huffmanCode =  finalCode.split(" ");
+        
         result += finalName+"\n";
         result += ""+finalCode+"";
         
