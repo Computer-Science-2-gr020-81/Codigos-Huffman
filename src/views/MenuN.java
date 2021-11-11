@@ -173,6 +173,8 @@ public class MenuN extends JFrame {
             drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
             drawController.setLetters(dataController.getLetters());
             drawController.generateTree();
+            
+            JOptionPane.showMessageDialog(null, "Mensaje procesado correctamente","Salida",JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
         }

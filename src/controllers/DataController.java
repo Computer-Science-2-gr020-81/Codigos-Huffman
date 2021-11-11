@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import models.Nodo;
 public class DataController {
 
     private List<String> letters = new ArrayList<>();
+    private final List<String> specialCharacters = Arrays.asList("@","#","$","~","!","&","+",":",";","=","?","|","<",">",".","-","^","*","(",")","%","!","ñ");
     private Map<String, Integer> countLetters = new HashMap<>();
     private Nodo<String>[][] treeRepresentation;
 
@@ -29,8 +31,15 @@ public class DataController {
     }
 
     public void startProcess(String input) throws Exception{
+        for(int i = 0; i < input.length();i++){
+            if(specialCharacters.contains(input.substring(i,i+1))){
+                System.out.println("Entre");
+                throw new Exception("La cadena no puede tener caracteres especiales");
+            }
+        }
+        
         if (input.equals("") || input.equals(" ")) {
-            throw new Exception("La cadena no puede ser vacia");
+             throw new Exception("La cadena no puede ser vacia");
         } else {
             resetFields();
             findAllLetters(input);
