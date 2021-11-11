@@ -50,7 +50,9 @@ public class MenuN extends JFrame {
         Arbol = new javax.swing.JButton();
         Matriz = new javax.swing.JButton();
         btnResults = new javax.swing.JButton();
-        lblResult = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtResults = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,9 +129,12 @@ public class MenuN extends JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        lblResult.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblResult.setToolTipText("");
-        lblResult.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
+        txtResults.setEditable(false);
+        txtResults.setColumns(20);
+        txtResults.setRows(5);
+        jScrollPane1.setViewportView(txtResults);
+
+        jLabel3.setText("Información:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,8 +145,12 @@ public class MenuN extends JFrame {
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblResult, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,9 +158,11 @@ public class MenuN extends JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGap(3, 3, 3)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -209,7 +220,8 @@ public class MenuN extends JFrame {
         resultsController.findHuffmanCode(drawController.getLogicTree().getRaiz(),"");
         resultsController.setLetters(dataController.getLetters());
         String result = resultsController.generateOutput();
-        lblResult.setText(result);
+        txtResults.setEditable(false);
+        txtResults.setText(result);
     }//GEN-LAST:event_btnResultsActionPerformed
     public DataController getDataController() {
         return dataController;
@@ -239,7 +251,9 @@ public class MenuN extends JFrame {
     private javax.swing.JButton btnResults;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblResult;
+    private javax.swing.JTextArea txtResults;
     // End of variables declaration//GEN-END:variables
 }

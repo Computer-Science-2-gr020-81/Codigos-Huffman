@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import models.Arbol;
 import models.Nodo;
 
@@ -33,46 +35,59 @@ public class ResultsController {
     public void setLetters(List<String> letters) {
         this.letters = letters;
     }
+    
+    private String calculateLength(String code){
+        String whiteSpaces = "";
+        int size = code.length();
+        for(int i = 0; i < size;i++){
+            if(code.equals("0")){
+                whiteSpaces += "   ";
+            }else{
+                whiteSpaces += " ";
+            }
+        }
+        return whiteSpaces;
+    }
 
     public String generateOutput() {
-        String result = "<html><body>";
+        String result = "";
         String newData = "";
         String finalCode = "";
+        String finalName = "";
+        Map<String,String> asociation = new HashMap<>();
         
         //Codigo a cada letra
-        result += "<p>";
         for (int i = 0; i < letters.size(); i++) {
             Nodo<String> nodo = logicTree.returnNodo(letters.get(i));
             newData += nodo.getHuffmanCode();
             result += " "+letters.get(i) + "=" + nodo.getHuffmanCode();
         }
-        result += "</p>";
-        result += "<br>";
+        result += "\n";
         //Datos
         int originalSize = (letters.size())*8;
-        result += "<p>Sin comprimir "+originalSize+" bits</p>";
+        result += "Sin comprimir "+originalSize+" bits";
         
         int newSize = newData.length();
-        result += "<p>Comprimido "+newSize+" bits</p>";
+        result += "Comprimido "+newSize+" bits";
         
-        result += "<br>";
+        result += "\n";
         
         double codificado = newSize*(100)/originalSize;
         double ahorro = 100 - codificado;
         
-        result += "<p>Codificado: "+codificado+"%"+" de espacio.Ahorro: " + ahorro+"%</p>";
-        result += "<br>";
-        result += "<p>"+message+"</p>";
+        result += "Codificado: "+codificado+"%"+" de espacio.Ahorro: " + ahorro+"%\n";
+        result += "\n";
         
-        result += "<p>";
         for (int j = 0; j < message.length(); j++) {
             Nodo<String> nodo = logicTree.returnNodo(message.substring(j, j+1));
-            finalCode += nodo.getHuffmanCode();
-           
+            finalCode += nodo.getHuffmanCode()+" ";
+            
         }
-        result += finalCode+"</p>";
+       
+        result += finalName+"\n";
+        result += ""+finalCode+"";
         
-        result += "</body></html>";
+        //result += "</body></html>";
         
         return result;
 
