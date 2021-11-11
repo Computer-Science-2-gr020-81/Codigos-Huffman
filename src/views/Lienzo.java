@@ -21,7 +21,7 @@ public class Lienzo extends JPanel {
 
     public void pintar(Graphics g, int x, int y, Nodo raiz) {
         if (raiz != null) {
-            g.setFont(new Font("Arial",Font.PLAIN,22));
+            g.setFont(new Font("Arial",Font.PLAIN,14));
             int extra = raiz.nodosCompletos(raiz) * (ancho / 2); //Espacio extra para que los nodos no queden pegados
             g.drawOval(x, y, diametro, diametro); //Dibujar el nodo
             g.drawString(String.valueOf(raiz.getValue()), x+12, y + 18); //Dibujar el valor del nodo

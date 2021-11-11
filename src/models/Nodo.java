@@ -117,9 +117,7 @@ public class Nodo<T> {
 
     @Override
     public String toString() {
-        return "Nodo{" + "value=" + value + ", leftNode=" + leftNode + ", rightNode=" + rightNode + ", wasUsed=" + wasUsed + ", colIndex=" + colIndex + '}';
-    }
-
-    
+        return "Nodo{" + "value=" + value + ", leftNode=" + leftNode + ", rightNode=" + rightNode + ", wasUsed=" + wasUsed + ", colIndex=" + colIndex + ", HuffmanCode=" + HuffmanCode + '}';
+    } 
     
 }

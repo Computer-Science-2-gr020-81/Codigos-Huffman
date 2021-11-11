@@ -3,16 +3,12 @@ package views;
 import controllers.MatrizController;
 import controllers.DataController;
 import controllers.DrawTreeController;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
+import controllers.ResultsController;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import models.Nodo;
 
 public class MenuN extends JFrame {
 
@@ -21,13 +17,15 @@ public class MenuN extends JFrame {
     private JTable matriz = new JTable();
     private JScrollPane dibujoMatriz = new JScrollPane();
     private DrawTreeController drawController;
-    ;
+    private ResultsController resultsController;
+    
 
     public MenuN() {
         initTemplate();
-        dataController = new DataController(this);
-        dataController.initListeners();
+        dataController = new DataController();
         matrizController = new MatrizController(this);
+        resultsController = new ResultsController();
+        drawController = new DrawTreeController();
     }
 
     public JButton getBtnStart() {
@@ -127,6 +125,8 @@ public class MenuN extends JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+        lblResult.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblResult.setToolTipText("");
         lblResult.setBorder(javax.swing.BorderFactory.createTitledBorder("Información"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -156,10 +156,17 @@ public class MenuN extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoActionPerformed
-            this.drawController = new DrawTreeController();
+            
+        try {
+            String input = getInputMessage();
+            dataController.startProcess(input);
+            resultsController.setMessage(input);
             drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
             drawController.setLetters(dataController.getLetters());
             drawController.generateTree();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_TextoActionPerformed
 
     private void ArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArbolActionPerformed
@@ -179,35 +186,17 @@ public class MenuN extends JFrame {
 
             TableRepresentation table = new TableRepresentation();
             table.initTemplate(rowData, colNames);            
-            
-            /*dibujoMatriz = new JScrollPane();
-            dibujoMatriz.setSize(Panel.getWidth() - 50, 430);
-            dibujoMatriz.setLocation(20, 180);
-            dibujoMatriz.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-            dibujoMatriz.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            
-            matriz = new JTable();
-            matriz.setModel(new DefaultTableModel(rowData, colNames));
-            dibujoMatriz.setViewportView(matriz);
-            
-            matriz.setSize(new Dimension(dibujoMatriz.getWidth(), dibujoMatriz.getHeight()));
-            matriz.setLocation(0, 0);
-
-            Panel.add(dibujoMatriz);
-            //dibujoMatriz.add(matriz);
-            dibujoMatriz.updateUI();
-            dibujoMatriz.repaint();
-            Panel.updateUI();
-            Panel.repaint();
-            repaint();*/
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Asegurese de tener datos registrados en la aplicación", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         }
     }//GEN-LAST:event_MatrizActionPerformed
 
     private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultsActionPerformed
-        dataController.findHuffmanCode(drawController.getLogicTree().getRaiz(),"");
+        resultsController.setLogicTree(drawController.getLogicTree());
+        resultsController.findHuffmanCode(drawController.getLogicTree().getRaiz(),"");
+        resultsController.setLetters(dataController.getLetters());
+        String result = resultsController.generateOutput();
+        lblResult.setText(result);
     }//GEN-LAST:event_btnResultsActionPerformed
     public DataController getDataController() {
         return dataController;

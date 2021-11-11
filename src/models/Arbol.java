@@ -1,7 +1,7 @@
 package models;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
 
 public class Arbol<T> {
 
@@ -302,19 +302,10 @@ public class Arbol<T> {
     }
 
     public Nodo<T> returnNodo(T x) {
-        Nodo<T> q, p = raiz;
-
-        if (raiz == null) {
-            return null;
-        }
-        q = null;
-        while (p != null) {
-            if (x.hashCode() < p.getValue().hashCode()) {
-                p = p.getIzquierda();
-            } else if (x.hashCode() > p.getValue().hashCode()) {
-                p = p.getDerecha();
-            } else if(x.equals(p.getValue())) {
-                return p;
+        inOrden(raiz);
+        for(int i = 0; i < inNodes.size(); i++){
+            if(Objects.equals(x, inNodes.get(i).getValue())){
+               return inNodes.get(i);
             }
         }
         return null;
