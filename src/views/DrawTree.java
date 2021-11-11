@@ -44,7 +44,7 @@ public class DrawTree extends JFrame {
 
     public void initTemplate() {
         setLayout(null);
-        setTitle("Dibujo árbol Avl");
+        setTitle("Dibujo árbol");
         setSize(new Dimension(ancho, alto));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         initComponents();

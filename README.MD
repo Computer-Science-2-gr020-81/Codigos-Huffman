@@ -1,8 +1,10 @@
 # Codigo Huffman
 
+Programa de implementación de los arboles de Huffman para encriptar un mensaje y reducir su almacenamiento. 
+
 ## Ejecución en modo desarrollo
 
-Puede ejecitar el escript de bash para automatizar la compilación y ejecución del proyecto
+Puede ejecutar el script de bash para automatizar la compilación y ejecución del proyecto
 
 ```console
 sh dev.sh
@@ -19,3 +21,13 @@ cd ../<output-dir>
 
 java Main
 ```
+
+## Capturas del programa
+
+![](docs/Menu.png)
+
+![](docs/Arbol.png)
+
+![](docs/Matriz.png)
+
+![](docs/Results.png)
