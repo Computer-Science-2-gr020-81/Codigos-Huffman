@@ -216,6 +216,7 @@ public class MenuN extends JFrame {
     }//GEN-LAST:event_MatrizActionPerformed
 
     private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultsActionPerformed
+        resultsController.setResultLabel(txtResults);
         resultsController.setLogicTree(drawController.getLogicTree());
         resultsController.findHuffmanCode(drawController.getLogicTree().getRaiz(),"");
         resultsController.setLetters(dataController.getLetters());

@@ -1,8 +1,10 @@
 package controllers;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JTextArea;
 import models.Arbol;
 import models.Nodo;
 
@@ -11,11 +13,16 @@ public class ResultsController {
     private Arbol<String> logicTree;
     private String message;
     private List<String> letters;
+    private JTextArea resultLabel;
 
     public Arbol<String> getLogicTree() {
         return logicTree;
     }
 
+    public void setResultLabel(JTextArea resultLabel) {
+        this.resultLabel = resultLabel;
+    }
+    
     public void setLogicTree(Arbol<String> logicTree) {
         this.logicTree = logicTree;
     }
@@ -81,10 +88,28 @@ public class ResultsController {
         for (int j = 0; j < message.length(); j++) {
             Nodo<String> nodo = logicTree.returnNodo(message.substring(j, j+1));
             finalCode += nodo.getHuffmanCode()+" ";
+            if(!asociation.containsKey(nodo.getHuffmanCode())){
+                asociation.put(nodo.getHuffmanCode(), message.substring(j, j+1));
+            }
+            
             
         }
         String[] huffmanCode =  finalCode.split(" ");
         
+        for(String e:huffmanCode){
+            for(int index = 0; index < e.length();index++){
+                if(index == 0){
+                    resultLabel.setForeground(Color.BLACK);
+                    finalName += asociation.get(e);
+                }else{
+                    resultLabel.setForeground(Color.WHITE);
+                    finalName += "0";
+                }
+            }
+            resultLabel.setForeground(Color.WHITE);
+            finalName += "0";
+        }
+        resultLabel.setForeground(Color.BLACK);
         result += finalName+"\n";
         result += ""+finalCode+"";
         
