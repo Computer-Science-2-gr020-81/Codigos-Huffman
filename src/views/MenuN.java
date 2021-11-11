@@ -176,6 +176,7 @@ public class MenuN extends JFrame {
             
             JOptionPane.showMessageDialog(null, "Mensaje procesado correctamente","Salida",JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_TextoActionPerformed

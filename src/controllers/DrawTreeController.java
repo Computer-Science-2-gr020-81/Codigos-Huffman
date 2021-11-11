@@ -40,7 +40,7 @@ public class DrawTreeController {
 
     public void generateTree() {
         //Creando primer nodo del arbol
-
+        logicTree = new Arbol<>();
         logicTree.insertarNodo(String.valueOf(treeRepresentation[1][treeRepresentation[0].length - 1].getValue()));
         logicTree.getRaiz().setColIndex(treeRepresentation[1][treeRepresentation[0].length - 1].getColIndex());
 
