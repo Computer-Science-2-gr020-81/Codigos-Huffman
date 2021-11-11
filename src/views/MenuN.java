@@ -58,7 +58,7 @@ public class MenuN extends JFrame {
 
         jLabel2.setText("Digite el Mensaje (solo se aceptan caracteres de la 'a' a la 'z'):");
 
-        Texto.setText("Procesar Entarda");
+        Texto.setText("Procesar Entrada");
         Texto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextoActionPerformed(evt);

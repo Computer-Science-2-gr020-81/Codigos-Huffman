@@ -21,7 +21,7 @@ public class DrawTree extends JFrame {
 
     private void initComponents() {
         panel = new Lienzo();
-        panel.setPreferredSize(new Dimension(2000, 2000));
+        panel.setPreferredSize(new Dimension(1000, 1000));
         
         panel.setArbol(drawTreeController.getLogicTree());
 

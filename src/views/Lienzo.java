@@ -28,10 +28,10 @@ public class Lienzo extends JPanel {
             
             //Dibujar lineas izquierda y derecha
             if (raiz.getIzquierda()!= null) {
-                g.drawLine(x+radio, y+radio, x - ancho - extra + radio, y + ancho + radio);
+                g.drawLine(x+radio, y+radio+15, x - ancho - extra + radio+15, y + ancho + radio);
             }
             if (raiz.getDerecha()!= null) {
-                g.drawLine(x + radio, y + radio, x + ancho + extra + radio, y + ancho + radio);
+                g.drawLine(x + radio, y + radio+15, x + ancho + extra + radio-15, y + ancho + radio);
             }
             
             //Llamadas recursivas para dibujar a los hijos

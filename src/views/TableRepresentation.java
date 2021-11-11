@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
     
 
 public class TableRepresentation extends JFrame {
@@ -19,7 +20,12 @@ public class TableRepresentation extends JFrame {
     private void initComponents(String[][] rows,String[] colums){
         table = new JTable(rows, colums);
         table.setSize(new Dimension(1000, alto));
-        
+        TableColumn columna;
+        columna=table.getColumnModel().getColumn(0);
+        columna.setPreferredWidth(90);
+        columna.setMaxWidth(90);
+        columna.setMinWidth(90);
+        table.setRowHeight(25);
         JScrollPane jsp = new JScrollPane(table);
         
         jsp.setSize(new Dimension(ancho, alto-35));

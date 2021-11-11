@@ -44,7 +44,7 @@ public class DrawTreeController {
         logicTree.insertarNodo(String.valueOf(treeRepresentation[1][treeRepresentation[0].length - 1].getValue()));
         logicTree.getRaiz().setColIndex(treeRepresentation[1][treeRepresentation[0].length - 1].getColIndex());
 
-        for (int i = treeRepresentation[0].length - 2; i > 0; i--) {
+        for (int i = treeRepresentation[0].length - 2; i >= 0; i--) {
             String father = treeRepresentation[2][i].getValue();
 
             Nodo<String> matrizFather = treeRepresentation[1][Integer.parseInt(father)];
@@ -53,7 +53,7 @@ public class DrawTreeController {
             Nodo<String> insercion = new Nodo<>(treeRepresentation[1][i].getValue());
             insercion.setColIndex(treeRepresentation[1][i].getColIndex());
 
-            if (i > 0 && i < letters.size()) {
+            if (i >= 0 && i < letters.size()) {
                 insercion.setValue(letters.get(i));
             }
 
