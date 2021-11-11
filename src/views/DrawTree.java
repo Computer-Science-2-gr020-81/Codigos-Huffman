@@ -14,8 +14,8 @@ public class DrawTree extends JFrame {
     private JScrollPane jsp;
 
     public DrawTree(DrawTreeController drawTreeController) {
-        ancho = 1000;
-        alto = 800;
+        ancho = 1200;
+        alto = 500;
         this.drawTreeController = drawTreeController;
     }
 

@@ -10,7 +10,7 @@ import models.Nodo;
 public class Lienzo extends JPanel {
 
     private Arbol arbol;
-    private static int ancho = 60, diametro = 30, radio = diametro / 2;
+    private static int ancho = 55, diametro = 30, radio = diametro / 2;
     //Diametro de los nodos, radio, ancho de separación entre los nodos
     
 
@@ -22,7 +22,7 @@ public class Lienzo extends JPanel {
     public void pintar(Graphics g, int x, int y, Nodo raiz) {
         if (raiz != null) {
             g.setFont(new Font("Arial",Font.PLAIN,14));
-            int extra = raiz.nodosCompletos(raiz) * (ancho / 2); //Espacio extra para que los nodos no queden pegados
+            int extra = raiz.nodosCompletos(raiz) * (ancho / 2)-40; //Espacio extra para que los nodos no queden pegados
             g.drawOval(x, y, diametro, diametro); //Dibujar el nodo
             g.drawString(String.valueOf(raiz.getValue()), x+12, y + 18); //Dibujar el valor del nodo
             
