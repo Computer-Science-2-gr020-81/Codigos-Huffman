@@ -50,7 +50,7 @@ public class ResultsController {
             if(code.equals("0")){
                 whiteSpaces += "   ";
             }else{
-                whiteSpaces += " ";
+                whiteSpaces += "  ";
             }
         }
         return whiteSpaces;
@@ -88,27 +88,30 @@ public class ResultsController {
         for (int j = 0; j < message.length(); j++) {
             Nodo<String> nodo = logicTree.returnNodo(message.substring(j, j+1));
             finalCode += nodo.getHuffmanCode()+" ";
+            finalName += message.substring(j, j+1) + calculateLength(nodo.getHuffmanCode());
             if(!asociation.containsKey(nodo.getHuffmanCode())){
                 asociation.put(nodo.getHuffmanCode(), message.substring(j, j+1));
             }
             
             
         }
-        String[] huffmanCode =  finalCode.split(" ");
         
-        for(String e:huffmanCode){
-            for(int index = 0; index < e.length();index++){
-                if(index == 0){
-                    resultLabel.setForeground(Color.BLACK);
-                    finalName += asociation.get(e);
-                }else{
-                    resultLabel.setForeground(Color.WHITE);
-                    finalName += "0";
-                }
-            }
-            resultLabel.setForeground(Color.WHITE);
-            finalName += "0";
-        }
+        
+//        String[] huffmanCode =  finalCode.split(" ");
+//        
+//        for(String e:huffmanCode){
+//            for(int index = 0; index < e.length();index++){
+//                if(index == 0){
+//                    resultLabel.setForeground(Color.BLACK);
+//                    finalName += asociation.get(e);
+//                }else{
+//                    resultLabel.setForeground(Color.WHITE);
+//                    finalName += "0";
+//                }
+//            }
+//            resultLabel.setForeground(Color.WHITE);
+//            finalName += "0";
+//        }
         resultLabel.setForeground(Color.BLACK);
         result += finalName+"\n";
         result += ""+finalCode+"";
