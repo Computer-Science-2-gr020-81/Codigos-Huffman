@@ -4,6 +4,8 @@ import controllers.MatrizController;
 import controllers.DataController;
 import controllers.DrawTreeController;
 import controllers.ResultsController;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -159,13 +161,20 @@ public class MenuN extends JFrame {
             
         try {
             String input = getInputMessage();
+            Pattern patron = Pattern.compile(".+[0-9]+.+");
+            Matcher matcher = patron.matcher(input);
+            boolean resultado= matcher.matches();
+            if(resultado){
+                throw new Exception("no ingrese numeros");
+            }
+            
             dataController.startProcess(input);
             resultsController.setMessage(input);
             drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
             drawController.setLetters(dataController.getLetters());
             drawController.generateTree();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_TextoActionPerformed
 
@@ -179,6 +188,7 @@ public class MenuN extends JFrame {
 
     }//GEN-LAST:event_ArbolActionPerformed
 
+  
     private void MatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatrizActionPerformed
         try {
             String[][] rowData = matrizController.retornoMatriz();
