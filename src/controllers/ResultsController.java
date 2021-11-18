@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import models.Arbol;
 import models.Nodo;
+import utils.Util;
 
 public class ResultsController {
 
@@ -16,6 +17,7 @@ public class ResultsController {
     private String finalCode="";
     private String finalName="";
     private Map<String,String> codes = new HashMap<>();
+    private Map<String,String> homologacion = new HashMap<>();
 
 
     public Arbol<String> getLogicTree() {
@@ -63,20 +65,14 @@ public class ResultsController {
         }
         return acumulado;
     }
-    
-    private String calculateLength(String code){
-        String whiteSpaces = "";
-        int size = code.length();
-        for(int i = 0; i < size;i++){
-            whiteSpaces += "<span> </span>";
-        }
-        return whiteSpaces;
-    }
+   
     
     public String generateOutput(){
         String result = "<html><body>";
         List<String> huffmanCode = new ArrayList<>();
      
+        finalCode = "";
+        finalName = "";
         
         //Codigo a cada letra
         result += "<p>";
@@ -86,6 +82,7 @@ public class ResultsController {
             huffmanCode.add(nodo.getHuffmanCode());
             if(!codes.containsKey(letters.get(i))){
                 codes.put(letters.get(i), nodo.getHuffmanCode());
+                homologacion.put(nodo.getHuffmanCode(), letters.get(i));
             }
         }
         
@@ -117,16 +114,21 @@ public class ResultsController {
         
     }
     public void setCode(){
-        
         for(int j = 0; j < message.length(); j++){
-            finalCode += codes.get(message.substring(j, j+1))+" ";  
+            finalCode += codes.get(message.substring(j, j+1))+"  ";  
         }
-        
     }
     public void setNameCode(){
-        finalName=generateSpaces(message,finalCode);
-        System.out.println(finalName);
-        System.out.println(finalCode);
+        finalName = Util.cloneString(finalCode);
+        String[] splitted = finalName.split("  ");
+        for(int i = 0; i < splitted.length; i++){
+            splitted[i] = splitted[i].replaceFirst(splitted[i].substring(0, 1), homologacion.get(splitted[i]));
+            splitted[i] = splitted[i].replaceAll("[0-9]", "  ");
+        }
+        finalName = "";
+        for(int i = 0; i < splitted.length;i++){
+            finalName += splitted[i] + "  ";
+        }
     }
     
     public String generateSpaces(String value, String code) {
@@ -136,12 +138,13 @@ public class ResultsController {
         for(String codeSplitted : splitted) {
             String aux = value.substring(counter, ++counter);
             do {
-                aux += "   ";
+                aux += " ";
             } while(aux.length() < codeSplitted.length() + 1);
             returned += aux;
         }
         return returned;
     }
+    
     public void findHuffmanCode(Nodo nodeList, String code) {
         if (nodeList != null) {
             if (nodeList.getLeftNode() == null && nodeList.getRightNode() == null) {
@@ -152,4 +155,5 @@ public class ResultsController {
             }
         }
     }
+    
 }
