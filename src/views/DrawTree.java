@@ -15,13 +15,13 @@ public class DrawTree extends JFrame {
 
     public DrawTree(DrawTreeController drawTreeController) {
         ancho = 1200;
-        alto = 500;
+        alto = 600;
         this.drawTreeController = drawTreeController;
     }
 
     private void initComponents() {
         panel = new Lienzo();
-        panel.setPreferredSize(new Dimension(1000, 1000));
+        panel.setPreferredSize(new Dimension(1500, 1000));
         
         panel.setArbol(drawTreeController.getLogicTree());
 
