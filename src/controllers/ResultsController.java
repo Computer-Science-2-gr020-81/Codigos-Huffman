@@ -1,5 +1,6 @@
 package controllers;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,11 +99,13 @@ public class ResultsController {
         result += "<p>Comprimido "+newSize+" bits</p>";
 
         
+        DecimalFormat df = new DecimalFormat("###.###");
+
+
         double codificado = newSize*(100.0)/originalSize;
-        double ahorro = 100 - codificado;
-        
-        result += "<p>Codificado: "+codificado+"%"+" de espacio.Ahorro: " + ahorro+"%</p><br>";
-        
+        double ahorro = 100.0 - codificado;
+
+        result += "<p>Codificado: "+df.format(codificado)+"%"+" de espacio.Ahorro: " + df.format(ahorro)+"%</p><br>";
        
         result += "</html></body>";
         return result;
@@ -117,11 +120,20 @@ public class ResultsController {
         finalName = Util.cloneString(finalCode);
         String[] splitted = finalName.split("  ");
         Util.imprimir(splitted);
+        boolean f=true;
+        boolean m=true;
         
         for(int i = 0; i < splitted.length; i++){
             splitted[i] = splitted[i].replaceFirst(splitted[i].substring(0, 1), homologacion.get(splitted[i]));
-            if(splitted[i].substring(0, 1).equals("s")){
+            if(splitted[i].substring(0, 1).equals("s")&& f){
+                splitted[i] = splitted[i].replaceAll("[0-9]", "  ");
+                f=false;
+                
+            }else if(splitted[i].substring(0, 1).equals("m")||splitted[i].substring(0, 1).equals("p")){
+                splitted[i] = splitted[i].replaceAll("[0-9]", "  ");
+            }else if(splitted[i].substring(0, 1).equals("i")&& m||splitted[i].substring(0, 1).equals("r")){
                 splitted[i] = splitted[i].replaceAll("[0-9]", "   ");
+                m=false;
             }else{
                 splitted[i] = splitted[i].replaceAll("[0-9]", "  ");
             }
