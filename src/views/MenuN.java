@@ -20,7 +20,6 @@ public class MenuN extends JFrame {
     private JScrollPane dibujoMatriz = new JScrollPane();
     private DrawTreeController drawController;
     private ResultsController resultsController;
-    
 
     public MenuN() {
         initTemplate();
@@ -165,26 +164,26 @@ public class MenuN extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoActionPerformed
-            
+
         try {
             String input = getInputMessage();
             Pattern patron = Pattern.compile(".+[0-9]+.+");
             Matcher matcher = patron.matcher(input);
-            boolean resultado= matcher.matches();
-            if(resultado){
+            boolean resultado = matcher.matches();
+            if (resultado) {
                 throw new Exception("no ingrese numeros");
             }
-            
+
             dataController.startProcess(input);
             resultsController.setMessage(input);
             drawController.setTreeRepresentation((dataController.getTreeRepresentation()));
             drawController.setLetters(dataController.getLetters());
             drawController.generateTree();
-            
-            JOptionPane.showMessageDialog(null, "Mensaje procesado correctamente","Salida",JOptionPane.INFORMATION_MESSAGE);
+
+            JOptionPane.showMessageDialog(null, "Mensaje procesado correctamente", "Salida", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, ex.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_TextoActionPerformed
 
@@ -198,25 +197,31 @@ public class MenuN extends JFrame {
 
     }//GEN-LAST:event_ArbolActionPerformed
 
-  
+
     private void MatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatrizActionPerformed
         try {
             String[][] rowData = matrizController.retornoMatriz();
             String[] colNames = matrizController.getArreglo();
 
             TableRepresentation table = new TableRepresentation();
-            table.initTemplate(rowData, colNames);            
+            table.initTemplate(rowData, colNames);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Asegurese de tener datos registrados en la aplicación", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_MatrizActionPerformed
 
     private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultsActionPerformed
-        resultsController.setLogicTree(drawController.getLogicTree());
-        resultsController.findHuffmanCode(drawController.getLogicTree().getRaiz(),"");
-        resultsController.setLetters(dataController.getLetters());
-        String result = resultsController.generateOutput();
-        jLabel4.setText(result);
+        try {
+            resultsController.setTreeRepresentation(dataController.getTreeRepresentation());
+            resultsController.setLogicTree(drawController.getLogicTree());
+            resultsController.findHuffmanCode(drawController.getLogicTree().getRaiz(), "");
+            resultsController.setLetters(dataController.getLetters());
+            String result = resultsController.generateOutput();
+            jLabel4.setText(result);
+
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnResultsActionPerformed
     public DataController getDataController() {
         return dataController;

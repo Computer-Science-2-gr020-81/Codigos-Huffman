@@ -12,6 +12,7 @@ public class ResultsController {
     private Arbol<String> logicTree;
     private String message;
     private List<String> letters;
+    private Nodo<String>[][] treeRepresentation;
 
     public Arbol<String> getLogicTree() {
         return logicTree;
@@ -20,6 +21,10 @@ public class ResultsController {
     public void setLogicTree(Arbol<String> logicTree) {
         this.logicTree = logicTree;
     }
+
+    public void setTreeRepresentation(Nodo<String>[][] treeRepresentation) {
+        this.treeRepresentation = treeRepresentation;
+    }  
 
     public String getMessage() {
         return message;
@@ -37,25 +42,20 @@ public class ResultsController {
         this.letters = letters;
     }
     
-    private int getLenghtHuffmanCode(List<String> huffmanCode){
-        String concat = "";
-        for(String e : huffmanCode){
-            concat += e;
-        }
+    private int getCompressedSize(){
+        int acumulado = 0;
         
-        System.out.println("Concat: " + concat);
-        return concat.length();
+        for(int i = 0; i < treeRepresentation[0].length-1; i++){
+            acumulado += Integer.valueOf(treeRepresentation[1][i].getValue());
+        }
+        return acumulado;
     }
     
     private String calculateLength(String code){
         String whiteSpaces = "";
         int size = code.length();
         for(int i = 0; i < size;i++){
-            if(code.equals("0")){
-                whiteSpaces += "&nbsp;&nbsp;&nbsp;";
-            }else{
-                whiteSpaces += "&nbsp;&nbsp;";
-            }
+            whiteSpaces += "<span> </span>";
         }
         return whiteSpaces;
     }
@@ -85,7 +85,7 @@ public class ResultsController {
         
         result += "<br>";
         
-        int newSize = getLenghtHuffmanCode(huffmanCode);
+        int newSize = getCompressedSize();
         result += "<p>Comprimido "+newSize+" bits</p>";
 
         result += "<br>";
@@ -98,7 +98,7 @@ public class ResultsController {
         
         for(int j = 0; j < message.length(); j++){
             finalCode += codes.get(message.substring(j, j+1))+"&nbsp;&nbsp;";
-            finalName += message.substring(j, j+1) + calculateLength(codes.get(message.substring(j, j+1)));
+            finalName += message.substring(j, j+1)  + calculateLength(codes.get(message.substring(j, j+1)));
         }
         
         result += "<p>"+finalName+"</p><br>";
