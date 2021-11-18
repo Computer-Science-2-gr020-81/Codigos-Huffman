@@ -103,14 +103,7 @@ public class ResultsController {
         
         result += "<p>Codificado: "+codificado+"%"+" de espacio.Ahorro: " + ahorro+"%</p><br>";
         
-       /* for(int j = 0; j < message.length(); j++){
-            finalCode += codes.get(message.substring(j, j+1))+"&nbsp;&nbsp;";
-            finalName += message.substring(j, j+1)  + calculateLength(codes.get(message.substring(j, j+1)));
-        }
-        
-        result += "<p>"+finalName+"</p><br>";
-        result += "<p>"+finalCode+"</p><br>";
-        */
+       
         result += "</html></body>";
         return result;
         
