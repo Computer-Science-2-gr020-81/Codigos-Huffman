@@ -220,22 +220,24 @@ public class MenuN extends JFrame {
 
     private void btnResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultsActionPerformed
         try {
+            jLabel4.setText("");
+            jLabel5.setText("");
+            jLabel6.setText("");
             resultsController.setTreeRepresentation(dataController.getTreeRepresentation());
             resultsController.setLogicTree(drawController.getLogicTree());
             resultsController.findHuffmanCode(drawController.getLogicTree().getRaiz(), "");
             resultsController.setLetters(dataController.getLetters());
             String result = resultsController.generateOutput();
             resultsController.setCode();
-            resultsController.setNameCode(); 
+            resultsController.setNameCode();
 
             jLabel4.setText(result);
             jLabel5.setText(resultsController.getFinalName());
             jLabel6.setText(resultsController.getFinalCode());
-           
 
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnResultsActionPerformed
     public DataController getDataController() {

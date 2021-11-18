@@ -70,9 +70,11 @@ public class ResultsController {
     public String generateOutput(){
         String result = "<html><body>";
         List<String> huffmanCode = new ArrayList<>();
-     
-        finalCode = "";
-        finalName = "";
+        codes = new HashMap<>();
+        homologacion = new HashMap<>();
+        finalCode= new String();
+        finalName= new String();
+        
         
         //Codigo a cada letra
         result += "<p>";
@@ -121,9 +123,15 @@ public class ResultsController {
     public void setNameCode(){
         finalName = Util.cloneString(finalCode);
         String[] splitted = finalName.split("  ");
+        Util.imprimir(splitted);
+        
         for(int i = 0; i < splitted.length; i++){
             splitted[i] = splitted[i].replaceFirst(splitted[i].substring(0, 1), homologacion.get(splitted[i]));
-            splitted[i] = splitted[i].replaceAll("[0-9]", "  ");
+            if(splitted[i].substring(0, 1).equals("s")){
+                splitted[i] = splitted[i].replaceAll("[0-9]", "   ");
+            }else{
+                splitted[i] = splitted[i].replaceAll("[0-9]", "  ");
+            }
         }
         finalName = "";
         for(int i = 0; i < splitted.length;i++){

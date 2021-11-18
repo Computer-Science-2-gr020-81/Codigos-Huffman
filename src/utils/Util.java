@@ -14,4 +14,12 @@ public class Util {
         }
         return result;
     }
+    public static void imprimir(String[] s){
+        for(String e:s){
+            System.out.println(e);    
+        }
+        System.out.println("\n");
+    
+        
+    } 
 }
