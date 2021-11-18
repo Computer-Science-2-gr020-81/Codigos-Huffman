@@ -13,10 +13,23 @@ public class ResultsController {
     private String message;
     private List<String> letters;
     private Nodo<String>[][] treeRepresentation;
+    private String finalCode="";
+    private String finalName="";
+    private Map<String,String> codes = new HashMap<>();
+
 
     public Arbol<String> getLogicTree() {
         return logicTree;
     }
+
+    public String getFinalCode() {
+        return finalCode;
+    }
+
+    public String getFinalName() {
+        return finalName;
+    }
+    
     
     public void setLogicTree(Arbol<String> logicTree) {
         this.logicTree = logicTree;
@@ -63,9 +76,7 @@ public class ResultsController {
     public String generateOutput(){
         String result = "<html><body>";
         List<String> huffmanCode = new ArrayList<>();
-        Map<String,String> codes = new HashMap<>();
-        String finalCode = "";
-        String finalName = "";
+     
         
         //Codigo a cada letra
         result += "<p>";
@@ -78,37 +89,59 @@ public class ResultsController {
             }
         }
         
-        result += "</p><br>";
+        result += "</p>";
         //Datos
         int originalSize = (message.length())*8;
         result += "<p>Sin comprimir "+message.length()+" * "+ 8 +" = "+originalSize+" bits</p>";
         
-        result += "<br>";
         
         int newSize = getCompressedSize();
         result += "<p>Comprimido "+newSize+" bits</p>";
 
-        result += "<br>";
         
         double codificado = newSize*(100)/originalSize;
         double ahorro = 100 - codificado;
         
         result += "<p>Codificado: "+codificado+"%"+" de espacio.Ahorro: " + ahorro+"%</p><br>";
-        result += "<br>";
         
-        for(int j = 0; j < message.length(); j++){
+       /* for(int j = 0; j < message.length(); j++){
             finalCode += codes.get(message.substring(j, j+1))+"&nbsp;&nbsp;";
             finalName += message.substring(j, j+1)  + calculateLength(codes.get(message.substring(j, j+1)));
         }
         
         result += "<p>"+finalName+"</p><br>";
         result += "<p>"+finalCode+"</p><br>";
-        
+        */
         result += "</html></body>";
         return result;
         
     }
+    public void setCode(){
+        
+        for(int j = 0; j < message.length(); j++){
+            finalCode += codes.get(message.substring(j, j+1))+" ";  
+        }
+        
+    }
+    public void setNameCode(){
+        finalName=generateSpaces(message,finalCode);
+        System.out.println(finalName);
+        System.out.println(finalCode);
+    }
     
+    public String generateSpaces(String value, String code) {
+        String[] splitted = code.split(" ");
+        String returned = "";
+        int counter = 0;
+        for(String codeSplitted : splitted) {
+            String aux = value.substring(counter, ++counter);
+            do {
+                aux += "   ";
+            } while(aux.length() < codeSplitted.length() + 1);
+            returned += aux;
+        }
+        return returned;
+    }
     public void findHuffmanCode(Nodo nodeList, String code) {
         if (nodeList != null) {
             if (nodeList.getLeftNode() == null && nodeList.getRightNode() == null) {
