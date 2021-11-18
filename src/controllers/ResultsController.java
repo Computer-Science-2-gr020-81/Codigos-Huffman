@@ -98,7 +98,7 @@ public class ResultsController {
         result += "<p>Comprimido "+newSize+" bits</p>";
 
         
-        double codificado = newSize*(100)/originalSize;
+        double codificado = newSize*(100.0)/originalSize;
         double ahorro = 100 - codificado;
         
         result += "<p>Codificado: "+codificado+"%"+" de espacio.Ahorro: " + ahorro+"%</p><br>";
