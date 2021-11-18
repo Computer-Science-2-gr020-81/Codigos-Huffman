@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JLabel;
 import models.Arbol;
 import models.Nodo;
 
@@ -13,14 +12,9 @@ public class ResultsController {
     private Arbol<String> logicTree;
     private String message;
     private List<String> letters;
-    private JLabel resultLabel;
 
     public Arbol<String> getLogicTree() {
         return logicTree;
-    }
-
-    public void setResultLabel(JLabel resultLabel) {
-        this.resultLabel = resultLabel;
     }
     
     public void setLogicTree(Arbol<String> logicTree) {
